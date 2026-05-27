@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name:  Flex File Generator
- * Plugin URI:   https://github.com/your-repo/flex-file-generator
+ * Plugin URI:   https://github.com/BhaumilMehta/flex-file-generator.git
  * Description:  Auto-generates PHP template parts and CSS stubs for every ACF Flexible Content layout when a field group is saved.
  * Version:      1.0.0
  * Author:       Bhaumil Mehta
