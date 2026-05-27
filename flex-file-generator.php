@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name:  Flex File Generator
- * Plugin URI:   https://github.com/BhaumilMehta/flex-file-generator.git
+ * Plugin URI:   https://github.com/your-repo/flex-file-generator
  * Description:  Auto-generates PHP template parts and CSS stubs for every ACF Flexible Content layout when a field group is saved.
  * Version:      1.0.0
  * Author:       Bhaumil Mehta
@@ -183,7 +183,7 @@ function ffg_php_template_content( string $layout_slug ): string {
 ?>
 <section class="{$layout_slug}">
 	<div class="container">
-
+		<h1>Flexible Content Layout: {$layout_slug}</h1>
 	</div>
 </section>
 PHP;
