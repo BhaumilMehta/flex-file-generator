@@ -100,12 +100,12 @@ function ffg_process_flex_field( array $field ) {
 /**
  * Creates the PHP template part for a layout if it does not yet exist.
  *
- * Destination: {theme}/template-parts/flexible/flex-{layout_slug}.php
+ * Destination: {theme}/flexible/php/flex-{layout_slug}.php
  *
  * @param string $layout_slug Sanitised layout name (underscores, lowercase).
  */
 function ffg_maybe_create_php_template( string $layout_slug ) {
-	$dir  = ffg_theme_path( 'template-parts/flexible' );
+	$dir  = ffg_theme_path( 'flexible/php' );
 	$file = $dir . '/flex-' . $layout_slug . '.php';
 
 	// Ensure the directory exists.
@@ -132,12 +132,12 @@ function ffg_maybe_create_php_template( string $layout_slug ) {
 /**
  * Creates the CSS stub for a layout if it does not yet exist.
  *
- * Destination: {theme}/assets/css/{layout_slug}.css
+ * Destination: {theme}/flexible/css/{layout_slug}.css
  *
  * @param string $layout_slug Sanitised layout name (underscores, lowercase).
  */
 function ffg_maybe_create_css_stub( string $layout_slug ) {
-	$dir  = ffg_theme_path( 'assets/css' );
+	$dir  = ffg_theme_path( 'flexible/css' );
 	$file = $dir . '/' . $layout_slug . '.css';
 
 	// Ensure the directory exists.
@@ -245,7 +245,7 @@ function ffg_enqueue_flex_styles() {
 		// Absolute path used for file_exists() check — no HTTP request needed.
 		// get_stylesheet_directory() always resolves to the active theme's root,
 		// regardless of theme name, so this works on any environment.
-		$file_abs = get_stylesheet_directory() . '/assets/css/' . $element . '.css';
+		$file_abs = get_stylesheet_directory() . '/flexible/css/' . $element . '.css';
  
 		// Only enqueue if the CSS file was actually generated.
 		if ( ! file_exists( $file_abs ) ) {
@@ -254,7 +254,7 @@ function ffg_enqueue_flex_styles() {
  
 		// Handle uses hyphens (WP convention); file name retains underscores.
 		$handle   = 'ffg-' . str_replace( '_', '-', $element );
-		$file_url = get_template_directory_uri() . '/assets/css/' . $element . '.css';
+		$file_url = get_template_directory_uri() . '/flexible/css/' . $element . '.css';
  
 		// filemtime() as version busts cache automatically on file change.
 		wp_enqueue_style( $handle, $file_url, array(), filemtime( $file_abs ), 'all' );
