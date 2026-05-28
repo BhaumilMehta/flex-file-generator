@@ -108,8 +108,12 @@ This means your theme's flexible content loop works out of the box:
 ```php
 if ( have_rows( 'page_builder' ) ) :
     while ( have_rows( 'page_builder' ) ) : the_row();
-        $layout = get_row_layout(); // e.g. "blog_posts_grid_section"
-        get_template_part( 'template-parts/flexible/flex', $layout );
+       $layout = get_row_layout();
+        $template = get_stylesheet_directory() . '/flexible/php/flex-' . $layout . '.php';
+
+        if ( file_exists( $template ) ) {
+            include $template;
+        }
     endwhile;
 endif;
 ```
