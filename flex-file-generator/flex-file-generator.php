@@ -3,7 +3,7 @@
  * Plugin Name:  Flex File Generator
  * Plugin URI:   https://github.com/BhaumilMehta/flex-file-generator.git
  * Description:  Auto-generates PHP template parts and CSS stubs for every ACF Flexible Content layout when a field group is saved.
- * Version:      1.0.0
+ * Version:      1.0.1
  * Author:       Bhaumil Mehta
  * License:      GPL-2.0-or-later
  * Text Domain:  flex-file-generator
@@ -241,19 +241,21 @@ function ffg_enqueue_flex_styles() {
 		if ( empty( $element ) || ! is_string( $element ) ) {
 			continue;
 		}
-
+ 
 		// Absolute path used for file_exists() check — no HTTP request needed.
-		$file_abs = ABSPATH . 'wp-content/themes/touch/assets/css/' . $element . '.css';
-
+		// get_stylesheet_directory() always resolves to the active theme's root,
+		// regardless of theme name, so this works on any environment.
+		$file_abs = get_stylesheet_directory() . '/assets/css/' . $element . '.css';
+ 
 		// Only enqueue if the CSS file was actually generated.
 		if ( ! file_exists( $file_abs ) ) {
 			continue;
 		}
-
+ 
 		// Handle uses hyphens (WP convention); file name retains underscores.
 		$handle   = 'ffg-' . str_replace( '_', '-', $element );
 		$file_url = get_template_directory_uri() . '/assets/css/' . $element . '.css';
-
+ 
 		// filemtime() as version busts cache automatically on file change.
 		wp_enqueue_style( $handle, $file_url, array(), filemtime( $file_abs ), 'all' );
 	}
